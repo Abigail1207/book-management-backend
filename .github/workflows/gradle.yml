@@ -21,6 +21,13 @@ jobs:
       contents: read
 
     steps:
+    - name: Setup DB
+      uses: harmon758/postgresql-action@v1
+      with:
+        postgresql version: '15.1'
+        postgresql db: book-management-db
+        postgresql user: postgres
+        postgresql password: password
     - uses: actions/checkout@v4
     - name: Set up JDK 17
       uses: actions/setup-java@v4
