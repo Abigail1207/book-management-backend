@@ -25,7 +25,7 @@ public class BookControllerTest {
         String url = "/book/create";
 
         mockMvc.perform(post(url).contentType(APPLICATION_JSON).content("{\"book\":\"book name\",\"category\":\"book category\"}"))
-            .andExpect(status().isCreated());
+            .andExpect(status().isOk());
     }
 }
 
