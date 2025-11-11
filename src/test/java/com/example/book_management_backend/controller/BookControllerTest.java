@@ -3,6 +3,7 @@ package com.example.book_management_backend.controller;
 import com.example.book_management_backend.exception.BookNotFoundException;
 import com.example.book_management_backend.model.Book;
 import com.example.book_management_backend.service.BookService;
+import com.example.book_management_backend.service.BookServiceTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -28,13 +29,13 @@ public class BookControllerTest {
     private BookService bookService;
 
     @Test
-    public void createBookTest() throws Exception {
+    public void testCreateBook() throws Exception {
         mockMvc.perform(post("/book/create").contentType(APPLICATION_JSON).content("{\"book\":\"book name\",\"category\":\"book category\"}"))
             .andExpect(status().isOk());
     }
 
     @Test
-    public void getBookById() throws Exception {
+    public void testGetBookById() throws Exception {
         Book book = new Book();
         book.setName("name");
         book.setCategory("category");
@@ -48,7 +49,7 @@ public class BookControllerTest {
     }
 
     @Test
-    public void getBookByIdThrowException() throws Exception {
+    public void testGetBookByIdThrowBookNotFoundException() throws Exception {
         when(bookService.getBookById(anyLong())).thenThrow(new BookNotFoundException("Book with id 27 is not found"));
 
         mockMvc.perform(get("/book/27"))
